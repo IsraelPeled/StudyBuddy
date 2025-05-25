@@ -1,96 +1,82 @@
-# StudyBuddy📚 API Guide
+# 🧑‍💻 Auth API – Usage Guide
 
-## Authorization:🔒
+This API allows users to create a new account or log in to an existing account to receive an authentication token. All routes are public and do not require a JWT token for access.
 
-### Sign Up
+## 🔐 Authorization
 
-**Endpoint:**  
-`POST /api/auth/signup`
-
-**Description:**  
-Create a new user account with a username, email, and password.
-
-### Request
-
-**URL:**  
-`POST base_url/api/auth/signup`
-
-**Headers:**
+The following routes do not require an Authorization header but expect:
 
 ```http
 Content-Type: application/json
 ```
 
-**Body:**
+## 📘 Sign Up
 
-```json
-{
-  "username": "test",
-  "email": "test@example.com",
-  "password": "123456"
-}
+**Endpoint:**
+
+```http
+POST /api/auth/signup
 ```
 
-**Response**
+Creates a new user account with a username, email, and password. The username must be at least 3 characters, and the password must be at least 6 characters.
 
-**✅ Success (201 Created):**
+### ✅ Success (201):
 
 ```json
 { "message": "User created seccessfully" }
 ```
 
-**❌ Error (e.g., 400 Bad Request):**
+### ❌ Error (e.g., 400 Bad Request):
+
+```json
+{ "message": "Username must be at least 3 characters" }
+```
+
+```json
+{ "message": "Password must be at least 6 characters" }
+```
 
 ```json
 { "error": "error.message" }
 ```
 
----
-
-### Login
-
-**Endpoint:**  
-`POST /api/auth/login`
-
-**Description:**  
-login user account with a email and password.
-
-### Request
-
-**URL:**  
-`POST base_url/api/auth/login`
-
-**Headers:**
-
-```http
-Content-Type: application/json
-```
-
-**Body:**
+### ❌ Error (e.g., 500 Internal Server Error):
 
 ```json
-{
-  "email": "test@example.com",
-  "password": "123456"
-}
+{ "error": "error.message" }
 ```
 
-**Response**
+## 📘 Login
 
-**✅ Success (200):**
+**Endpoint:**
+
+```http
+POST /api/auth/login
+```
+
+Logs in a user with an email and password, returning a JWT token for authentication. The token expires in 2 hours.
+
+### ✅ Success (200):
 
 ```json
 { "token": "some token..." }
 ```
 
-**❌ Error (e.g., 400 Bad Request):**
+### ❌ Error (e.g., 401 Unauthorized):
 
 ```json
 { "message": "Invalid credentials" }
 ```
 
-**❌ Error (e.g., 500):**
+### ❌ Error (e.g., 500 Internal Server Error):
 
 ```json
-{ "error": "Server Error" }
+{ "error": "error.message" }
 ```
+
+## 🗂️ Route Summary
+
+| Method | Endpoint           | Description               |
+| ------ | ------------------ | ------------------------- |
+| POST   | `/api/auth/signup` | Create a new user account |
+| POST   | `/api/auth/login`  | Log in to a user account  |
