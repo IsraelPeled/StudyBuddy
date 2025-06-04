@@ -5,7 +5,6 @@ const {
   getAllGroups,
   joinGroup,
   leaveGroup,
-  deleteGroup,
   cancelJoinGroupRequest,
 } = require("../controllers/groupController");
 
