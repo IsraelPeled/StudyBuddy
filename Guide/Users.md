@@ -11,15 +11,15 @@ Authorization: Bearer <your_token_here>
 Content-Type: application/json
 ```
 
-### 📘 Get Current User Info
+### 📘 Get All Users
 
 **Endpoint:**
 
 ```http
-GET /api/users/me
+GET /api/users/
 ```
 
-Returns the authenticated user's info (excluding the password).
+Returns all users.
 
 ### 📘 Get User by ID
 

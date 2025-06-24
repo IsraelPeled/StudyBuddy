@@ -7,12 +7,16 @@ const {
   updateCurrentUser,
   changePassword,
   deleteAccount,
+  getAllUsers,
 } = require("../controllers/userController");
 
 const router = express.Router();
 
 //* get current user info
 router.get("/me", auth, getCurrentUser);
+
+//*get all users
+router.get("/", auth, getAllUsers);
 
 //* get user by id
 router.get("/:id", auth, getUserById);
