@@ -14,7 +14,7 @@ exports.getCurrentUser = async (req, res) => {
 
 exports.getAllUsers = async (req, res) => {
   try {
-    const users = await User.find().select("-password"); // הסתרת הסיסמה
+    const users = await User.find().select("-password");
     res.status(200).json(users);
   } catch (error) {
     res.status(500).json({ error: "Server error" });
